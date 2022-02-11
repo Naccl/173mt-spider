@@ -28,10 +28,10 @@ def httpGet(url):
     return -1
 
 
-def mkdirs(bs):
+def mkdirs(bs, url):
     title = bs.title.string.rsplit("-", 1)[0][:-1]
     print(title)
-    dirPath = dirPathPrefix + title + "/"
+    dirPath = dirPathPrefix + title + " - " + url + "/"
     if not os.path.exists(dirPath):
         os.makedirs(dirPath)
     return dirPath
@@ -65,7 +65,7 @@ def saveImg(imgSrcList, dirPath):
 
 def main(url):
     bs = getBeautifulSoup(url)
-    dirPath = mkdirs(bs)
+    dirPath = mkdirs(bs, url)
     pageNum = getPageNum(bs)
     imgSrcList = []
     getImgSrcList(bs, imgSrcList)
